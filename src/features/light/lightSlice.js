@@ -41,6 +41,42 @@ export const saveDutyCycle = createAsyncThunk('/light/saveDutyCycle', async duty
     return response.json()
 })
 
+export const saveBrightness = createAsyncThunk('/light/saveBrightness', async brightness => {
+    const response = await fetch('/light/save_brightness', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({brightness: brightness})
+    })
+    return response.json()
+})
+
+export const saveRed = createAsyncThunk('/light/saveRed', async red => {
+    const response = await fetch('/light/save_red', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({red: red})
+    })
+    return response.json()
+})
+
+export const saveGreen = createAsyncThunk('/light/saveGreen', async green => {
+    const response = await fetch('/light/save_green', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({green: green})
+    })
+    return response.json()
+})
+
+export const saveBlue = createAsyncThunk('/light/saveBlue', async blue => {
+    const response = await fetch('/light/save_blue', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({blue: blue})
+    })
+    return response.json()
+})
+
 const lightSlice = createSlice({
     name: 'light',
     initialState: {
@@ -55,12 +91,21 @@ const lightSlice = createSlice({
         min_duty_cycle: 10,
         max_duty_cycle: 90,
         duty_cycle: 50,
+
+        brightness: 127,
+        red: 255,
+        green: 0,
+        blue: 0,
     },
     reducers:{
         setPower: (state, action) => { state.power = action.payload },
         setBlink: (state, action) => { state.blink = action.payload },
         setFrequency: (state, action) => { state.frequency = action.payload },
         setDutyCycle: (state, action) => { state.duty_cycle = action.payload },
+        setBrightness: (state, action) => { state.brightness = action.payload },
+        setRed: (state, action) => { state.red = action.payload },
+        setGreen: (state, action) => { state.green = action.payload },
+        setBlue: (state, action) => { state.blue = action.payload },
     },
     extraReducers:{
         [fetchLightState.fulfilled]: (state, action) => {
@@ -83,9 +128,30 @@ const lightSlice = createSlice({
         [saveDutyCycle.fulfilled]: (state, action) => {
             console.log('DutyCycle set', action.payload)
         },
+        [saveBrightness.fulfilled]: (state, action) => {
+            console.log('Brightness set', action.payload)
+        },
+        [saveRed.fulfilled]: (state, action) => {
+            console.log('Red set', action.payload)
+        },
+        [saveGreen.fulfilled]: (state, action) => {
+            console.log('Green set', action.payload)
+        },
+        [saveBlue.fulfilled]: (state, action) => {
+            console.log('Blue set', action.payload)
+        },
     }
 })
 
-export const {setPower, setBlink, setFrequency, setDutyCycle} = lightSlice.actions
+export const {
+    setPower,
+    setBlink,
+    setFrequency,
+    setDutyCycle,
+    setBrightness,
+    setRed,
+    setGreen,
+    setBlue,
+} = lightSlice.actions
 
 export default lightSlice.reducer

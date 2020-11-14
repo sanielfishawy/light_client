@@ -11,10 +11,8 @@ export const FrequencyRange = () => {
   const minFreq = useSelector( state => state.light.min_frequency )
   const maxFreq = useSelector( state => state.light.max_frequency )
   const defaultFreq = useSelector( state => state.light.default_frequency )
-  const blink = useSelector ( state => state.light.blink )
 
-  const buttonVisibility = blink && ( frequency !== defaultFreq ) ? 'visible' : 'invisible'
-  const frequencyVisibility = blink ? 'visible' : 'invisible'
+  const buttonVisibility =  frequency !== defaultFreq  ? '' : 'd-none'
 
   const dispatch = useDispatch()
   const onFrequencyChange = async (freq) => {
@@ -23,8 +21,7 @@ export const FrequencyRange = () => {
   }
 
   return (
-    <Form
-        className={frequencyVisibility}>
+    <Form>
         <Form.Label>Frequency <small>{frequency}Hz</small></Form.Label>
         <RangeSlider
             value={frequency}

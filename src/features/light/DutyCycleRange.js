@@ -9,9 +9,6 @@ export const DutyCycleRange = () => {
   const dutyCycle = useSelector( state => state.light.duty_cycle )
   const minDutyCycle = useSelector( state => state.light.min_duty_cycle )
   const maxDutyCycle = useSelector( state => state.light.max_duty_cycle )
-  const blink = useSelector ( state => state.light.blink )
-
-  const dutyCycleVisibility = blink ? 'visible' : 'invisible'
 
   const dispatch = useDispatch()
   const onDutyCycleChange = async (dutyCycle) => {
@@ -20,15 +17,14 @@ export const DutyCycleRange = () => {
   }
 
   return (
-    <Form
-        className={dutyCycleVisibility}>
+    <Form>
         <Form.Label>Duty cycle <small>{dutyCycle}%</small></Form.Label>
         <RangeSlider
             value={dutyCycle}
             onChange={e => onDutyCycleChange(e.target.value)}
             min={minDutyCycle}
             max={maxDutyCycle}
-            tooltipLabel={frequency => `${frequency}Hz`}
+            tooltipLabel={dutyCycle => `${dutyCycle}%`}
         />
     </Form>
   )};
