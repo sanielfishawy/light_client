@@ -11,4 +11,4 @@ export const store = configureStore({
 //   async () => {await store.dispatch(fetchWooferState())},
 //   500,
 // )
-  // (async () => {await store.dispatch(fetchWooferState())})()
+(async () => {await store.dispatch(fetchLightState())})()
